@@ -19,7 +19,7 @@ export const AddEmployee = () => {
 
     const [departments, setDepartments] = useState([]);
     const [startDate, setStartDate] = useState(null);
-    const [errors, setErrors] = useState({});
+    const [formError, setFormError] = useState({});
 
     useEffect(() => {
         axios.get("https://localhost:44392/api/departments").then((response) => {
@@ -45,19 +45,74 @@ export const AddEmployee = () => {
         }
     }
 
-    function addEmployees() {
-        var payload = {
-            firstName: employeeFirstName.current.value,
-            lastName: employeeLastName.current.value,
-            email: employeeEmail.current.value,
-            dob: startDate,
-            age: employeeAge.current.value,
-            salary: employeeSalary.current.value,
-            departmentName: employeeDepartment.current.value
-        };
-        axios.post("https://localhost:44392/api/employees/", payload).then((res) => {
-            navigate("/employee");
-        })
+    const validateForm = () => {
+        let err = {};
+
+        if (employeeFirstName.current.value === '') {
+            err.firstName = 'First Name Required'
+        } else {
+            let regex = /[^a-zA-Z]/ig;
+            if (regex.test(employeeFirstName.current.value)) {
+                err.firstName = 'First Name Cannot Contain Numbers'
+            }
+        }
+
+        if (employeeLastName.current.value === '') {
+            err.lastName = 'Last Name Required'
+        } else {
+            let regex = /[^a-zA-Z]/ig;
+            if (regex.test(employeeLastName.current.value)) {
+                err.lastName = 'Last Name Cannot Contain Numbers'
+            }
+        }
+
+        if (employeeEmail.current.value === '') {
+            err.email = 'Email Required'
+        } else {
+            let regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+            if (!regex.test(employeeEmail.current.value)) {
+                err.email = 'Email Not Valid!'
+            }
+        }
+
+        if (startDate === null) {
+            err.dob = 'Please Select Your Date of Birth'
+        }
+        if (employeeAge.current.value < 18) {
+            err.age = 'You are under age'
+        }
+        if (employeeAge.current.value === '') {
+            err.age = 'Age Required'
+        }
+        if (employeeSalary.current.value === '') {
+            err.salary = 'Salary Required'
+        }
+        if (employeeDepartment.current.value == '') {
+            err.departmentName = 'Please Select a Department'
+        }
+
+        setFormError({ ...err })
+
+        return Object.keys(err).length < 1;
+    }
+
+    const addEmployees = () => {
+        let isValid = validateForm()
+        if (isValid) {
+            var payload = {
+                firstName: employeeFirstName.current.value,
+                lastName: employeeLastName.current.value,
+                email: employeeEmail.current.value,
+                dob: startDate,
+                age: employeeAge.current.value,
+                salary: employeeSalary.current.value,
+                departmentName: employeeDepartment.current.value
+            };
+            axios.post("https://localhost:44392/api/employees/", payload).then((res) => {
+                navigate("/employee");
+            })
+        }
+
     }
 
 
@@ -72,6 +127,7 @@ export const AddEmployee = () => {
                             <input type="text" className="form-control" ref={employeeFirstName} placeholder="First Name" required
                             ></input>
                             <label >First Name</label>
+                            <span className="non-valid">{formError.firstName}</span>
                         </div>
                     </div>
                     <div className="col">
@@ -79,12 +135,14 @@ export const AddEmployee = () => {
                             <input type="lastName" className="form-control" ref={employeeLastName} placeholder="Last Name"
                             ></input>
                             <label >Last Name</label>
+                            <span className="non-valid">{formError.lastName}</span>
                         </div>
                     </div>
                     <div className="col">
                         <div className="form-floating">
                             <input type="email" className="form-control" ref={employeeEmail} placeholder="name@example.com" ></input>
                             <label >Email address</label>
+                            <span className="non-valid">{formError.email}</span>
                         </div>
                     </div>
                     <div className="col">
@@ -92,6 +150,7 @@ export const AddEmployee = () => {
 
                             <input type="date" ref={employeeDoB} className="form-control" placeholder="" selected={startDate} onChange={date => setStartDate(date.target.value)} ></input>
                             <label >Date of Birth</label>
+                            <span className="non-valid">{formError.dob}</span>
                         </div>
                     </div>
 
@@ -103,6 +162,7 @@ export const AddEmployee = () => {
                             <input type="text" className="form-control" id="formAge" placeholder="Age" ref={employeeAge} readOnly
                             ></input>
                             <label >Age</label>
+                            <span className="non-valid">{formError.age}</span>
                         </div>
                     </div>
                     <div className="col">
@@ -112,6 +172,7 @@ export const AddEmployee = () => {
                             <div className="form-floating">
                                 <input type="number" className="form-control" id="formSalary" placeholder="Username" ref={employeeSalary}  ></input>
                                 <label >Salary</label>
+                                <span className="non-valid">{formError.salary}</span>
                             </div>
                         </div>
 
@@ -120,7 +181,7 @@ export const AddEmployee = () => {
                     <div className="col">
                         <div className="form-floating">
                             <select className="form-control" id="formDepartment" placeholder="Department" ref={employeeDepartment}>
-                                <option>Choose a department</option>
+                                <option value="">Choose a department</option>
                                 {
                                     departments.map((dp) => (
                                         <option value={dp.departmentName} key={dp.id}>{dp.departmentName}</option>
@@ -129,6 +190,7 @@ export const AddEmployee = () => {
                                 }
                             </select>
                             <label >Department</label>
+                            <span className="non-valid">{formError.departmentName}</span>
                         </div>
                     </div>
                     <div className="col">
