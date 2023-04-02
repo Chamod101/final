@@ -59,7 +59,7 @@ export const Employee = () => {
             </DeleteConfirmathion>
             <Row className="mt-2">
                 <Col md={{ span: 4, offset: 4 }}>
-                    <button variant="primary" type="button" className="btn btn-primary" onClick={() => navigate("/addemployee")}>
+                    <button type="button" className="btn btn-light btn-outline-secondary" onClick={() => navigate("/addemployee")}>
                         Add a New Employee
                     </button>
                 </Col>
@@ -69,7 +69,7 @@ export const Employee = () => {
             <Row xs={1} md={4} className="g-4 mt-1" >
                 {employees.map((em) => (
                     <Col key={em.id}>
-                        <Card className="card text-dark bg-light mb-3 " >
+                        <Card className="card text-dark bg-light mb-3" >
                             <Card.Body>
                                 <Card.Title>{em.firstName} {em.lastName}</Card.Title>
                                 <hr></hr>
@@ -97,7 +97,7 @@ export const Employee = () => {
                                 <hr></hr>
                                 <row>
                                     <Col>
-                                        <button className="btn btn-primary" onClick={() => navigate(`/updateemployee/${em.id}`)}>Edit</button>
+                                        <button className="btn btn-primary" onClick={() => navigate(`/updateemployee/${em.id}`)}>Edit</button>&nbsp;
                                         <button className="btn btn-danger" onClick={() => { showConfirm(em.id) }}>Delete</button>
                                     </Col>
                                 </row>

@@ -1,5 +1,11 @@
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+
 export const Home = () => {
     return (
-        <h1>This is home page</h1>
+        <div>
+
+        </div>
     );
 }

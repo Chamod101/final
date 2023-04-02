@@ -3,7 +3,9 @@ import { format } from "date-fns";
 import { useState, useEffect, useRef } from "react";
 import ReactDatePicker, { CalendarContainer } from "react-datepicker";
 import { Navigate, useNavigate } from "react-router-dom";
-
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 
 
 export const AddEmployee = () => {
@@ -118,55 +120,57 @@ export const AddEmployee = () => {
 
     return (
 
-        <div className="container">
+        <Container className="bg-light border">
 
             <form >
-                <div className="row">
-                    <div className="col">
+                <Row>
+                    <Col>
                         <div className="form-floating">
                             <input type="text" className="form-control" ref={employeeFirstName} placeholder="First Name" required
                             ></input>
                             <label >First Name</label>
                             <span className="non-valid">{formError.firstName}</span>
                         </div>
-                    </div>
-                    <div className="col">
+                    </Col>
+                    <Col>
                         <div className="form-floating">
                             <input type="lastName" className="form-control" ref={employeeLastName} placeholder="Last Name"
                             ></input>
                             <label >Last Name</label>
                             <span className="non-valid">{formError.lastName}</span>
                         </div>
-                    </div>
-                    <div className="col">
+                    </Col>
+
+                </Row> &nbsp;
+                <Row>
+                    <Col>
                         <div className="form-floating">
                             <input type="email" className="form-control" ref={employeeEmail} placeholder="name@example.com" ></input>
                             <label >Email address</label>
                             <span className="non-valid">{formError.email}</span>
                         </div>
-                    </div>
-                    <div className="col">
+                    </Col>
+
+                    <Col>
                         <div className="form-floating" >
 
                             <input type="date" ref={employeeDoB} className="form-control" placeholder="" selected={startDate} onChange={date => setStartDate(date.target.value)} ></input>
                             <label >Date of Birth</label>
                             <span className="non-valid">{formError.dob}</span>
                         </div>
-                    </div>
+                    </Col>
+                </Row>&nbsp;
+                <Row>
 
-                </div> &nbsp;
-                <div className="row">
-
-                    <div className="col">
+                    <Col>
                         <div className="form-floating">
                             <input type="text" className="form-control" id="formAge" placeholder="Age" ref={employeeAge} readOnly
                             ></input>
                             <label >Age</label>
                             <span className="non-valid">{formError.age}</span>
                         </div>
-                    </div>
-                    <div className="col">
-
+                    </Col>
+                    <Col>
                         <div className="input-group">
                             <span className="input-group-text">LKR</span>
                             <div className="form-floating">
@@ -175,10 +179,13 @@ export const AddEmployee = () => {
                                 <span className="non-valid">{formError.salary}</span>
                             </div>
                         </div>
+                    </Col>
 
 
-                    </div>
-                    <div className="col">
+
+                </Row>&nbsp;
+                <Row>
+                    <Col>
                         <div className="form-floating">
                             <select className="form-control" id="formDepartment" placeholder="Department" ref={employeeDepartment}>
                                 <option value="">Choose a department</option>
@@ -192,21 +199,28 @@ export const AddEmployee = () => {
                             <label >Department</label>
                             <span className="non-valid">{formError.departmentName}</span>
                         </div>
-                    </div>
-                    <div className="col">
+                    </Col>
+
+                </Row>&nbsp;
+                <Row>
+                    <Col>
+                    </Col>
+                    <Col>
                         <div className="d-grid gap-2 p-2 justify-content">
-                            <button variant="primary" type="button" className="btn btn-primary" id="formButton" onClick={addEmployees}>Save </button>
+                            <button variant="primary" type="button" className="btn btn-light btn-outline-secondary" id="formButton" onClick={addEmployees}>Save </button>
 
                         </div>
 
-                    </div>
+                    </Col>
+                    <Col>
+                    </Col>
 
-                </div>
+                </Row>
 
-            </form >&nbsp;
+            </form >
 
 
-        </div >
+        </Container >
 
     );
 }

@@ -1,5 +1,8 @@
+
+
 .App {
   text-align: center;
+ 
 }
 
 .App-logo {
@@ -40,3 +43,9 @@
 .non-valid{
   color: red;
 }
+
+.container{
+  margin-top: 20px;
+  padding:10px;
+}
+

@@ -31,7 +31,7 @@ export const Department = () => {
         <div>
             <Row className="mt-2">
                 <Col md={{ span: 4, offset: 4 }}>
-                    <button variant="primary" type="button" className="btn btn-primary" onClick={() => navigate("/adddepartment")}>
+                    <button variant="primary" type="button" className="btn btn-light btn-outline-secondary" onClick={() => navigate("/adddepartment")}>
                         Add New Department
                     </button>
                 </Col>
@@ -41,11 +41,11 @@ export const Department = () => {
             <Row xs={1} md={4} className="g-4 mt-1"  >
                 {departments.map((dp) => (
                     <Col key={dp.id}>
-                        <Card className="card text-center text-white bg-primary mb-3">
+                        <Card className="card text-center text-white bg-info mb-3" border="dark">
                             <Card.Body>
                                 <Card.Title>{dp.departmentName}</Card.Title>
                                 <hr></hr>
-                                <button className="btn btn-primary" onClick={() => navigate(`/updatedepartment/${dp.id}`)}>Edit</button>
+                                <button className="btn btn-info" onClick={() => navigate(`/updatedepartment/${dp.id}`)}>Edit</button>
                             </Card.Body>
                         </Card>
                     </Col>
