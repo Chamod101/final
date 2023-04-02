@@ -24,16 +24,16 @@ export const Employee = () => {
         })
     }, [])
 
-    function showConfirm(id) {
+    const showConfirm = (id) => {
         setShowModal(true);
         setItemToDelete(id);
     }
-    function closeConfirm() {
+    const closeConfirm = () => {
         setShowModal(false);
         setItemToDelete(0);
     }
 
-    function deleteRecordHandler() {
+    const deleteRecordHandler = () => {
         axios.delete(`https://localhost:44392/api/employees/${itemToDelete}`).then((result) => {
 
             setEmployees((existingData) => {

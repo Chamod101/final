@@ -117,7 +117,7 @@ export const UpdateEmployee = () => {
     }
 
 
-    function updateEmployeeHandler() {
+    const updateEmployeeHandler = () => {
         let isValid = validateForm()
         if (isValid) {
             var payload = {

@@ -19,7 +19,7 @@ export const UpdateDepartment = () => {
         })
     }, []);
 
-    function updateDepartmentHandler() {
+    const updateDepartmentHandler = () => {
         let isValid = validateForm()
         if (isValid) {
             var payload = {

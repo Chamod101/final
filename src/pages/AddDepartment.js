@@ -12,7 +12,7 @@ export const AddDepartment = () => {
 
     const navigate = useNavigate();
 
-    function addDepartments() {
+    const addDepartments = () => {
         let isValid = validateForm()
         if (isValid) {
             var payload = {
