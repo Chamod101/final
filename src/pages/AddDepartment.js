@@ -21,6 +21,8 @@ export const AddDepartment = () => {
             };
             axios.post("https://localhost:44392/api/departments/", payload).then((res) => {
                 navigate("/department");
+            }).catch((err) => {
+                console.log(err);
             })
         }
 

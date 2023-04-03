@@ -21,6 +21,8 @@ export const Employee = () => {
             setEmployees((existingData) => {
                 return response.data
             })
+        }).catch((err) => {
+            console.log(err);
         })
     }, [])
 
@@ -41,6 +43,8 @@ export const Employee = () => {
             })
             setShowModal(false);
             setItemToDelete(0);
+        }).catch((err) => {
+            console.log(err);
         })
     }
 

@@ -28,7 +28,9 @@ export const AddEmployee = () => {
             setDepartments((existingData) => {
                 return response.data
             })
-        });
+        }).catch((err) => {
+            console.log(err);
+        })
     }, []);
 
     useEffect(() => {
@@ -112,6 +114,8 @@ export const AddEmployee = () => {
             };
             axios.post("https://localhost:44392/api/employees/", payload).then((res) => {
                 navigate("/employee");
+            }).catch((err) => {
+                console.log(err);
             })
         }
 

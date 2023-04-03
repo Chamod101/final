@@ -16,6 +16,8 @@ export const UpdateDepartment = () => {
     useEffect(() => {
         axios.get(`https://localhost:44392/api/departments/${idD}`).then((response) => {
             departmentNamec.current.value = response.data.departmentName;
+        }).catch((err) => {
+            console.log(err);
         })
     }, []);
 

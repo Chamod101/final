@@ -50,6 +50,8 @@ export const UpdateEmployee = () => {
             employeeAge.current.value = response.data.age;
             employeeSalary.current.value = response.data.salary;
             employeeDepartment.current.value = response.data.departmentName;
+        }).catch((err) => {
+            console.log(err);
         })
     }, []);
 
@@ -61,7 +63,9 @@ export const UpdateEmployee = () => {
             setDepartments((existingData) => {
                 return res.data
             })
-        });
+        }).catch((err) => {
+            console.log(err);
+        })
     }, []);
 
 
